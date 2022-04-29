@@ -4,7 +4,6 @@ import nltk
 
 tokenizers = Enum("Tokenizers","nltk keras")
 
-
 def tokenize_set(documents,answers,tokenizer):
 
     tokenized_docs = {}
@@ -30,6 +29,8 @@ def tokenize(string,tokenizer = tokenizers.keras):
     """
 
     if tokenizer == tokenizers.nltk:
+        # Uncomment this line if you do not have punkt
+        # nltk.download('punkt')
         return nltk.word_tokenize(string.lower())
     elif tokenizer == tokenizers.keras:
         return keras.preprocessing.text.text_to_word_sequence(string)

@@ -27,7 +27,7 @@ from keras import regularizers
 from keras.layers import Bidirectional, Dense, Dropout, Embedding, LSTM, TimeDistributed
 from keras.models import Sequential, load_model
 
-from data.datasets import *
+from datasets import *
 from eval import keras_metrics, metrics
 from nlp import tokenizer as tk
 from utils import info, preprocessing, postprocessing, plots
