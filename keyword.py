@@ -1,48 +1,10 @@
 from bs4 import BeautifulSoup
+import numpy as np
+import os
 
-
-# Reading the data inside the xml
-# file to a variable under the name
-# data
-with open('./Dataset/xml1/2337.xml', 'r') as f:
-	data = f.read()
-
-# Passing the stored data inside
-# the beautifulsoup parser, storing
-# the returned object
-Bs_data = BeautifulSoup(data, "xml")
-
-# Finding all instances of tag
-# `sentence`
-b_sentence = Bs_data.find_all('sentence')
-
-sentence=[]
-for elem in b_sentence:
-    sentence.append(elem.text)
-
-print("sentence",sentence)
-
-# Finding all instances of tag
-# `token`
-#b_token = Bs_data.find_all('token')
-#print("b_token",b_token)
-
-# Using find() to extract attributes
-# of the first instance of the tag, verb
-#b_vb = Bs_data.find('token', {"pos":"VB"})
-
-b_tokens = Bs_data.find_all('tokens')
-#print("b_tokens",b_tokens)
-
-b_semantics = Bs_data.find_all('semantics')
-
-#print("b_semantics",b_semantics)
-
-# Using find() to extract attributes
-# of the first instance of the tag, verb
-#b_sem = Bs_data.find('b_semantics', {"token":"id"})
-
-#print("b_sem",b_sem)
+filepath = './Dataset/xml1/'
+savepath = './Datasetnew/'
+#filename = '2337'
 
 def get_index(word,sentence):
     index = 0
@@ -52,7 +14,7 @@ def get_index(word,sentence):
             index = sentence.find(word,index)
         if index == -1:
             break
-        print("{} found at {}".format(word,index))
+#        print("{} found at {}".format(word,index))
         idx.append(index)
         index +=len(word)
     return idx
@@ -73,7 +35,7 @@ def get_dict(sentence,word1,word2):
 #            print("value",value)
             dict[key] = value
 
-    print("dict",dict)
+#    print("dict",dict)
 
     return dict
 
@@ -84,21 +46,108 @@ def get_keyword(sentence,word,dict):
 #    print("separate",separate)
 
     keyword = []
-    non_keyword = []
+    str = ''
     for i in range(len(separate)):
         if word in separate[i]:
             key = separate[i+1]
 #            print("key",key)
             keyword.append(dict[key])
+#            str = str + dict[key] + ' '
          
-    print("keyword",keyword)
+#    print("keyword",keyword)
+#    print("str",str)
 
-    return keyword
+    str = '; '.join(keyword)
+#    print("str",str)
 
-#print("get_index",get_index('token',str(b_token)))
+    str_array = np.array([str])
+#    print("str_array",str_array)
+    return keyword, str_array
 
-#print("get_dict",get_dict(str(b_tokens),'token id=','lemma='))
+def get_nonkeyword(sentence,keyword):
+    non_keyword = []
 
-keyword_dict = get_dict(str(b_tokens),'token id=','lemma=')
+    separate = sentence[0].split(' ')
+#    print("separate",separate)
 
-keyword = get_keyword(str(b_semantics),'token id=',keyword_dict)
+    for i in range(len(separate)):
+        if separate[i] not in keyword:
+            non_keyword.append(separate[i])
+#    print("non_keyword",non_keyword)
+
+    if len(non_keyword) > 0:
+        str = '; '.join(non_keyword)
+#        print("str",str)
+
+        str_array = np.array([str])
+#        print("str_array",str_array)
+    else:
+        str_array = np.array([''])
+#        print("str_array",str_array)
+
+    return non_keyword, str_array
+
+
+
+def save_file(b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
+#    keyword_dict = get_dict(str(b_tokens),'token id=','lemma=')
+#    keyword,str = get_keyword(str(b_semantics),'token id=',keyword_dict)
+#    non_keyword,str_nonkey = get_nonkeyword(sentence,keyword)
+
+    keyword_dict = get_dict(str(b_tokens_con),word1,word2)
+#    print("keyword_dict",keyword_dict)
+    keyword,str_key = get_keyword(str(b_semantics_con),word1,keyword_dict)
+#    print("keyword",keyword)
+    non_keyword,str_nonkey = get_nonkeyword(sentence,keyword)
+#    print("non_keyword",non_keyword)
+
+    #Add in files:
+    savepath_sen = savepath + '.abstr'
+    np.savetxt(savepath_sen,np.asarray(sentence),fmt='%s')
+
+    savepath_key = savepath + '.contr'
+    np.savetxt(savepath_key,str_key,fmt='%s')
+
+    savepath_nonkey = savepath + '.uncontr'
+
+    if len(non_keyword) > 0:
+        np.savetxt(savepath_nonkey,str_nonkey,fmt='%s')
+    else:
+        open(savepath_nonkey,"w")
+
+if __name__ == '__main__':
+    files = os.listdir(filepath)
+    i=1
+#    for file in files:
+    for file in files:
+        filename = filepath+'/'+file
+        print("filename",filename)
+        with open(filename, 'r') as f:
+            data = f.read()
+
+        Bs_data = BeautifulSoup(data, "xml")
+
+        # Finding sentence
+        b_sentence = Bs_data.find_all('sentence')
+
+        sentence=[]
+        for elem in b_sentence:
+            sentence.append(elem.text)
+
+#        print("sentence",sentence)
+        b_tokens = Bs_data.find_all('tokens')
+#        print("b_tokens",b_tokens)
+
+        b_semantics = Bs_data.find_all('semantics')
+#        print("b_tokens",b_tokens)
+
+        savefilepath = savepath+'/'+file.split('.')[0]
+#        print("savefilepath",savefilepath)
+
+#        save_file(b_tokens,b_semantics,sentence,'token id=','lemma=',savefilepath)
+        save_file(b_tokens,b_semantics,sentence,'token id=','surface=',savefilepath)
+        i=i+1
+
+        #for debug
+#        if i ==3:
+#            break
