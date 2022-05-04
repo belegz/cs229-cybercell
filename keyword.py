@@ -105,10 +105,11 @@ def save_file(b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
     savepath_sen = savepath + '.abstr'
     np.savetxt(savepath_sen,np.asarray(sentence),fmt='%s')
 
-    savepath_key = savepath + '.contr'
+#    savepath_key = savepath + '.contr'
+    savepath_key = savepath + '.uncontr'
     np.savetxt(savepath_key,str_key,fmt='%s')
 
-    savepath_nonkey = savepath + '.uncontr'
+    savepath_nonkey = savepath + '.contr'
 
     if len(non_keyword) > 0:
         np.savetxt(savepath_nonkey,str_nonkey,fmt='%s')
