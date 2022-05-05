@@ -82,7 +82,7 @@ def get_nonkeyword(sentence,keyword):
         str_array = np.array([str])
 #        print("str_array",str_array)
     else:
-        str_array = np.array([''])
+        str_array = np.array(['none'])
 #        print("str_array",str_array)
 
     return non_keyword, str_array
@@ -111,10 +111,10 @@ def save_file(b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
 
     savepath_nonkey = savepath + '.contr'
 
-    if len(non_keyword) > 0:
-        np.savetxt(savepath_nonkey,str_nonkey,fmt='%s')
-    else:
-        open(savepath_nonkey,"w")
+#    if len(non_keyword) > 0:
+    np.savetxt(savepath_nonkey,str_nonkey,fmt='%s')
+ #   else:
+ #       open(savepath_nonkey,"w")
 
 if __name__ == '__main__':
     files = os.listdir(filepath)
