@@ -27,7 +27,7 @@ from keras import regularizers
 from keras.layers import Bidirectional, Dense, Dropout, Embedding, LSTM, TimeDistributed
 from keras.models import Sequential, load_model
 
-from datasets import *
+from data.datasets import *
 from eval import keras_metrics, metrics
 from nlp import tokenizer as tk
 from utils import info, preprocessing, postprocessing, plots
@@ -44,7 +44,7 @@ info.log_versions()
 
 # GLOBAL VARIABLES
 
-SAVE_MODEL = False
+SAVE_MODEL = True
 MODEL_PATH = "models/simplernn.h5"
 SHOW_PLOTS = False
 
@@ -52,7 +52,8 @@ SHOW_PLOTS = False
 
 # Dataset and hyperparameters for each dataset
 
-DATASET = Hulth
+#DATASET = Hulth
+DATASET = Datasetnew
 
 if DATASET == Semeval2017:
     tokenizer = tk.tokenizers.nltk
@@ -98,6 +99,17 @@ elif DATASET == Semeval2010:
     KP_WEIGHT = 500
     STEM_MODE = metrics.stemMode.results
     STEM_TEST = True
+elif DATASET == Datasetnew:
+    tokenizer = tk.tokenizers.nltk
+    DATASET_FOLDER = "data/Datasetnew"
+    MAX_DOCUMENT_LENGTH = 550
+    MAX_VOCABULARY_SIZE = 20000
+    EMBEDDINGS_SIZE = 300
+    BATCH_SIZE = 32
+    EPOCHS = 200
+    KP_WEIGHT = 10
+    STEM_MODE = metrics.stemMode.none
+    STEM_TEST = False
 else:
     raise NotImplementedError("Can't set the hyperparameters: unknown dataset")
 
