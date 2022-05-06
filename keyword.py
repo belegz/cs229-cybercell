@@ -112,7 +112,7 @@ def save_file(b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
     savepath_nonkey = savepath + '.contr'
 
 #    if len(non_keyword) > 0:
-    np.savetxt(savepath_nonkey,str_nonkey,fmt='%s')
+#    np.savetxt(savepath_nonkey,str_nonkey,fmt='%s')
  #   else:
  #       open(savepath_nonkey,"w")
 
@@ -132,6 +132,7 @@ if __name__ == '__main__':
         b_sentence = Bs_data.find_all('sentence')
 
         sentence=[]
+#        sentence.append("command")
         for elem in b_sentence:
             sentence.append(elem.text)
 
