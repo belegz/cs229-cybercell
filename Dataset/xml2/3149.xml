@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3149">
+<sentence>the keys should be on the table on the right of a pile of napkins</sentence>
+<tokens>
+	<token id="1" surface="the" pos="DT" lemma="the"/>
+	<token id="2" surface="keys" pos="NNS" lemma="key"/>
+	<token id="3" surface="should" pos="MD" lemma="should"/>
+	<token id="4" surface="be" pos="VB" lemma="be"/>
+	<token id="5" surface="on" pos="IN" lemma="on"/>
+	<token id="6" surface="the" pos="DT" lemma="the"/>
+	<token id="7" surface="table" pos="NN" lemma="table"/>
+	<token id="8" surface="on" pos="IN" lemma="on"/>
+	<token id="9" surface="the" pos="DT" lemma="the"/>
+	<token id="10" surface="right" pos="NN" lemma="right"/>
+	<token id="11" surface="of" pos="IN" lemma="of"/>
+	<token id="12" surface="a" pos="DT" lemma="a"/>
+	<token id="13" surface="pile" pos="NN" lemma="pile"/>
+	<token id="14" surface="of" pos="IN" lemma="of"/>
+	<token id="15" surface="napkins" pos="NNS" lemma="napkin"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="det"/>
+	<dep from="4" to="2" type="nsubj"/>
+	<dep from="4" to="3" type="aux"/>
+	<dep from="0" to="4" type="root"/>
+	<dep from="4" to="5" type="prep"/>
+	<dep from="7" to="6" type="det"/>
+	<dep from="5" to="7" type="pobj"/>
+	<dep from="4" to="8" type="prep"/>
+	<dep from="10" to="9" type="det"/>
+	<dep from="8" to="10" type="pobj"/>
+	<dep from="10" to="11" type="prep"/>
+	<dep from="13" to="12" type="det"/>
+	<dep from="11" to="13" type="pobj"/>
+	<dep from="13" to="14" type="prep"/>
+	<dep from="14" to="15" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Being_located">
+			<lexicalUnit>
+				<token id="4"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="1"/>
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Location">
+				<token id="5"/>
+				<token id="6"/>
+				<token id="7"/>
+			</frameElement>
+		</frame>
+		<frame name="Being_located">
+			<lexicalUnit>
+				<token id="4"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="1"/>
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Location">
+				<token id="8"/>
+				<token id="9"/>
+				<token id="10"/>
+				<token id="11"/>
+				<token id="12"/>
+				<token id="13"/>
+				<token id="14"/>
+				<token id="15"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="amy_28.wav"/>
+	<file name="ilary_28.wav"/>
+</audioFiles>
+</command>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3304">
+<sentence>close the curtains in the living room</sentence>
+<tokens>
+	<token id="1" surface="close" pos="VB" lemma="close"/>
+	<token id="2" surface="the" pos="DT" lemma="the"/>
+	<token id="3" surface="curtains" pos="NNS" lemma="curtain"/>
+	<token id="4" surface="in" pos="IN" lemma="in"/>
+	<token id="5" surface="the" pos="DT" lemma="the"/>
+	<token id="6" surface="living" pos="NN" lemma="living"/>
+	<token id="7" surface="room" pos="NN" lemma="room"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="3" to="2" type="det"/>
+	<dep from="1" to="3" type="dojb"/>
+	<dep from="3" to="4" type="prep"/>
+	<dep from="7" to="5" type="det"/>
+	<dep from="7" to="6" type="nn"/>
+	<dep from="4" to="7" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Closure">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Container_portal">
+				<token id="2"/>
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+				<token id="6"/>
+				<token id="7"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+		<spatialRelation name="Spatial_relation">
+			<spatialRole type="Trajector">
+				<token id="2"/>
+				<token id="3"/>
+			</spatialRole>
+			<spatialRole type="Spatial_Indicator">
+				<token id="4"/>
+			</spatialRole>
+			<spatialRole type="Landmark">
+				<token id="5"/>
+				<token id="6"/>
+				<token id="7"/>
+			</spatialRole>
+		</spatialRelation>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech937742800204163009.wav"/>
+	<file name="speech7762126761749085132.wav"/>
+</audioFiles>
+</command>

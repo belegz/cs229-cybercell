@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3376">
+<sentence>see if the washing machine is empty</sentence>
+<tokens>
+	<token id="1" surface="see" pos="VB" lemma="see"/>
+	<token id="2" surface="if" pos="IN" lemma="if"/>
+	<token id="3" surface="the" pos="DT" lemma="the"/>
+	<token id="4" surface="washing" pos="NN" lemma="wash"/>
+	<token id="5" surface="machine" pos="NN" lemma="machine"/>
+	<token id="6" surface="is" pos="VBZ" lemma="be"/>
+	<token id="7" surface="empty" pos="JJ" lemma="empty"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="7" to="2" type="mark"/>
+	<dep from="5" to="3" type="det"/>
+	<dep from="5" to="4" type="nn"/>
+	<dep from="7" to="5" type="nsubj"/>
+	<dep from="7" to="6" type="cop"/>
+	<dep from="1" to="7" type="ccomp"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Inspecting">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Ground">
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+			</frameElement>
+			<frameElement type="Desired_state">
+				<token id="6"/>
+				<token id="7"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech2624486701155542032.wav"/>
+	<file name="speech8897233892060756701.wav"/>
+</audioFiles>
+</command>

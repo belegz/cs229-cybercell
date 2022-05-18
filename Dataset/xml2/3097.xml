@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3097">
+<sentence>please move along the fences</sentence>
+<tokens>
+	<token id="1" surface="please" pos="UH" lemma="please"/>
+	<token id="2" surface="move" pos="VB" lemma="move"/>
+	<token id="3" surface="along" pos="IN" lemma="along"/>
+	<token id="4" surface="the" pos="DT" lemma="the"/>
+	<token id="5" surface="fences" pos="NNS" lemma="fence"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="discourse"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="2" to="3" type="prep"/>
+	<dep from="5" to="4" type="det"/>
+	<dep from="3" to="5" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Motion">
+			<lexicalUnit>
+				<token id="2"/>
+			</lexicalUnit>
+			<frameElement type="Path">
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="steve_12.wav"/>
+	<file name="ilary_42.wav"/>
+</audioFiles>
+</command>

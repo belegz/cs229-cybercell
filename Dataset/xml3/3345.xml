@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3345">
+<sentence>open the press</sentence>
+<tokens>
+	<token id="1" surface="open" pos="VB" lemma="open"/>
+	<token id="2" surface="the" pos="DT" lemma="the"/>
+	<token id="3" surface="press" pos="NN" lemma="press"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="3" to="2" type="det"/>
+	<dep from="1" to="3" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Closure">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Containing_object">
+				<token id="2"/>
+				<token id="3"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech4889038095895197686.wav"/>
+</audioFiles>
+</command>

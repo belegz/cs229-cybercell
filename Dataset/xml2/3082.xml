@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3082">
+<sentence>i lost my ring in the living room can you search for it maybe it 's near the sofa</sentence>
+<tokens>
+	<token id="1" surface="i" pos="PRP" lemma="I"/>
+	<token id="2" surface="lost" pos="VBD" lemma="lose"/>
+	<token id="3" surface="my" pos="PRP$" lemma="my"/>
+	<token id="4" surface="ring" pos="NN" lemma="ring"/>
+	<token id="5" surface="in" pos="IN" lemma="in"/>
+	<token id="6" surface="the" pos="DT" lemma="the"/>
+	<token id="7" surface="living" pos="NN" lemma="living"/>
+	<token id="8" surface="room" pos="NN" lemma="room"/>
+	<token id="9" surface="can" pos="MD" lemma="can"/>
+	<token id="10" surface="you" pos="PRP" lemma="you"/>
+	<token id="11" surface="search" pos="VBP" lemma="search"/>
+	<token id="12" surface="for" pos="IN" lemma="for"/>
+	<token id="13" surface="it" pos="PRP" lemma="it"/>
+	<token id="14" surface="maybe" pos="RB" lemma="maybe"/>
+	<token id="15" surface="it" pos="PRP" lemma="it"/>
+	<token id="16" surface="'s" pos="VBZ" lemma="be"/>
+	<token id="17" surface="near" pos="IN" lemma="near"/>
+	<token id="18" surface="the" pos="DT" lemma="the"/>
+	<token id="19" surface="sofa" pos="NN" lemma="sofa"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="nsubj"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="4" to="3" type="poss"/>
+	<dep from="2" to="4" type="dobj"/>
+	<dep from="2" to="5" type="prep"/>
+	<dep from="8" to="6" type="det"/>
+	<dep from="8" to="7" type="nn"/>
+	<dep from="5" to="8" type="pobj"/>
+	<dep from="11" to="9" type="aux"/>
+	<dep from="11" to="10" type="nsubj"/>
+	<dep from="2" to="11" type="conj"/>
+	<dep from="11" to="12" type="prep"/>
+	<dep from="12" to="13" type="pobj"/>
+	<dep from="16" to="14" type="advmod"/>
+	<dep from="16" to="15" type="nsubj"/>
+	<dep from="11" to="16" type="conj"/>
+	<dep from="16" to="17" type="prep"/>
+	<dep from="19" to="18" type="det"/>
+	<dep from="17" to="19" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Searching">
+			<lexicalUnit>
+				<token id="11"/>
+			</lexicalUnit>
+			<frameElement type="Cognizer">
+				<token id="10"/>
+			</frameElement>
+			<frameElement type="Phenomenon">
+				<token id="12"/>
+				<token id="13"/>
+			</frameElement>
+		</frame>
+		<frame name="Being_located">
+			<lexicalUnit>
+				<token id="16"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="15"/>
+			</frameElement>
+			<frameElement type="Location">
+				<token id="17"/>
+				<token id="18"/>
+				<token id="19"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="maria_29.wav"/>
+	<file name="ilary_59.wav"/>
+</audioFiles>
+</command>

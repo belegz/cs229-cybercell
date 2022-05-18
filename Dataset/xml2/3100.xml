@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3100">
+<sentence>put down the newspaper</sentence>
+<tokens>
+	<token id="1" surface="put" pos="VB" lemma="put"/>
+	<token id="2" surface="down" pos="RP" lemma="down"/>
+	<token id="3" surface="the" pos="DT" lemma="the"/>
+	<token id="4" surface="newspaper" pos="NN" lemma="newspaper"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="1" to="2" type="prt"/>
+	<dep from="4" to="3" type="det"/>
+	<dep from="1" to="4" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Placing">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Area">
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="3"/>
+				<token id="4"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="maria_06.wav"/>
+</audioFiles>
+</command>

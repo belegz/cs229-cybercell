@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3380">
+<sentence>take the bottle from the table and use it to water the plant</sentence>
+<tokens>
+	<token id="1" surface="take" pos="VB" lemma="take"/>
+	<token id="2" surface="the" pos="DT" lemma="the"/>
+	<token id="3" surface="bottle" pos="NN" lemma="bottle"/>
+	<token id="4" surface="from" pos="IN" lemma="from"/>
+	<token id="5" surface="the" pos="DT" lemma="the"/>
+	<token id="6" surface="table" pos="NN" lemma="table"/>
+	<token id="7" surface="and" pos="CC" lemma="and"/>
+	<token id="8" surface="use" pos="VB" lemma="use"/>
+	<token id="9" surface="it" pos="PRP" lemma="it"/>
+	<token id="10" surface="to" pos="TO" lemma="to"/>
+	<token id="11" surface="water" pos="VB" lemma="water"/>
+	<token id="12" surface="the" pos="DT" lemma="the"/>
+	<token id="13" surface="plant" pos="NN" lemma="plant"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="3" to="2" type="det"/>
+	<dep from="1" to="3" type="dobj"/>
+	<dep from="1" to="4" type="prep"/>
+	<dep from="6" to="5" type="det"/>
+	<dep from="4" to="6" type="pobj"/>
+	<dep from="1" to="7" type="cc"/>
+	<dep from="1" to="8" type="conj"/>
+	<dep from="11" to="9" type="nsubj"/>
+	<dep from="11" to="10" type="aux"/>
+	<dep from="8" to="11" type="xcomp"/>
+	<dep from="13" to="12" type="det"/>
+	<dep from="11" to="13" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Taking">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="2"/>
+				<token id="3"/>
+			</frameElement>
+			<frameElement type="Source">
+				<token id="4"/>
+				<token id="5"/>
+				<token id="6"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech8624455832732701016.wav"/>
+	<file name="speech4947811416876142697.wav"/>
+</audioFiles>
+</command>

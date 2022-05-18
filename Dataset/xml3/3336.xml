@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3336">
+<sentence>i would like to read an architecture magazine can you bring me one</sentence>
+<tokens>
+	<token id="1" surface="i" pos="PRP" lemma="I"/>
+	<token id="2" surface="would" pos="MD" lemma="would"/>
+	<token id="3" surface="like" pos="VB" lemma="like"/>
+	<token id="4" surface="to" pos="TO" lemma="to"/>
+	<token id="5" surface="read" pos="VB" lemma="read"/>
+	<token id="6" surface="an" pos="DT" lemma="a"/>
+	<token id="7" surface="architecture" pos="NN" lemma="architecture"/>
+	<token id="8" surface="magazine" pos="NN" lemma="magazine"/>
+	<token id="9" surface="can" pos="MD" lemma="can"/>
+	<token id="10" surface="you" pos="PRP" lemma="you"/>
+	<token id="11" surface="bring" pos="VB" lemma="bring"/>
+	<token id="12" surface="me" pos="PRP" lemma="I"/>
+	<token id="13" surface="one" pos="CD" lemma="one"/>
+</tokens>
+<dependencies>
+	<dep from="3" to="1" type="nsubj"/>
+	<dep from="3" to="2" type="aux"/>
+	<dep from="0" to="3" type="root"/>
+	<dep from="5" to="4" type="aux"/>
+	<dep from="3" to="5" type="xcomp"/>
+	<dep from="8" to="6" type="det"/>
+	<dep from="8" to="7" type="nn"/>
+	<dep from="5" to="8" type="dobj"/>
+	<dep from="11" to="9" type="aux"/>
+	<dep from="11" to="10" type="nsubj"/>
+	<dep from="3" to="11" type="conj"/>
+	<dep from="11" to="12" type="iobj"/>
+	<dep from="11" to="13" type="dojb"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="11"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="10"/>
+			</frameElement>
+			<frameElement type="Beneficiary">
+				<token id="12"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="13"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech3784894911354643603.wav"/>
+</audioFiles>
+</command>

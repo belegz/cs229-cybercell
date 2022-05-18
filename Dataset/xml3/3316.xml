@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3316">
+<sentence>find the bottle of water and water the plant</sentence>
+<tokens>
+	<token id="1" surface="find" pos="VB" lemma="find"/>
+	<token id="2" surface="the" pos="DT" lemma="the"/>
+	<token id="3" surface="bottle" pos="NN" lemma="bottle"/>
+	<token id="4" surface="of" pos="IN" lemma="of"/>
+	<token id="5" surface="water" pos="NN" lemma="water"/>
+	<token id="6" surface="and" pos="CC" lemma="and"/>
+	<token id="7" surface="water" pos="NN" lemma="water"/>
+	<token id="8" surface="the" pos="DT" lemma="the"/>
+	<token id="9" surface="plant" pos="NN" lemma="plant"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="3" to="2" type="det"/>
+	<dep from="1" to="3" type="dobj"/>
+	<dep from="3" to="4" type="prep"/>
+	<dep from="4" to="5" type="pobj"/>
+	<dep from="5" to="6" type="cc"/>
+	<dep from="5" to="7" type="conj"/>
+	<dep from="9" to="8" type="det"/>
+	<dep from="7" to="9" type="dojb"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Searching">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Phenomenon">
+				<token id="2"/>
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech4519345141694864796.wav"/>
+</audioFiles>
+</command>

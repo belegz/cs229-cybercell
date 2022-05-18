@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3276">
+<sentence>robot can you bring me my reading glasses from the bedroom</sentence>
+<tokens>
+	<token id="1" surface="robot" pos="NN" lemma="robot"/>
+	<token id="2" surface="can" pos="MD" lemma="can"/>
+	<token id="3" surface="you" pos="PRP" lemma="you"/>
+	<token id="4" surface="bring" pos="VB" lemma="bring"/>
+	<token id="5" surface="me" pos="PRP" lemma="I"/>
+	<token id="6" surface="my" pos="PRP$" lemma="my"/>
+	<token id="7" surface="reading" pos="NN" lemma="reading"/>
+	<token id="8" surface="glasses" pos="NNS" lemma="glass"/>
+	<token id="9" surface="from" pos="IN" lemma="from"/>
+	<token id="10" surface="the" pos="DT" lemma="the"/>
+	<token id="11" surface="bedroom" pos="NN" lemma="bedroom"/>
+</tokens>
+<dependencies>
+	<dep from="4" to="1" type="discourse"/>
+	<dep from="4" to="2" type="aux"/>
+	<dep from="4" to="3" type="nsubj"/>
+	<dep from="0" to="4" type="root"/>
+	<dep from="4" to="5" type="iobj"/>
+	<dep from="8" to="6" type="poss"/>
+	<dep from="8" to="7" type="nn"/>
+	<dep from="4" to="8" type="dobj"/>
+	<dep from="4" to="9" type="prep"/>
+	<dep from="11" to="10" type="det"/>
+	<dep from="9" to="11" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="4"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="3"/>
+			</frameElement>
+			<frameElement type="Beneficiary">
+				<token id="5"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="6"/>
+				<token id="7"/>
+				<token id="8"/>
+			</frameElement>
+			<frameElement type="Source">
+				<token id="9"/>
+				<token id="10"/>
+				<token id="11"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech5500841042491557248.wav"/>
+</audioFiles>
+</command>

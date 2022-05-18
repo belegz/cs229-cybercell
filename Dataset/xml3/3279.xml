@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3279">
+<sentence>robot can you turn the electric oven on</sentence>
+<tokens>
+	<token id="1" surface="robot" pos="NN" lemma="robot"/>
+	<token id="2" surface="can" pos="MD" lemma="can"/>
+	<token id="3" surface="you" pos="PRP" lemma="you"/>
+	<token id="4" surface="turn" pos="VB" lemma="turn"/>
+	<token id="5" surface="the" pos="DT" lemma="the"/>
+	<token id="6" surface="electric" pos="JJ" lemma="electric"/>
+	<token id="7" surface="oven" pos="NN" lemma="oven"/>
+	<token id="8" surface="on" pos="RP" lemma="on"/>
+</tokens>
+<dependencies>
+	<dep from="4" to="1" type="discourse"/>
+	<dep from="4" to="2" type="aux"/>
+	<dep from="4" to="3" type="nsubj"/>
+	<dep from="0" to="4" type="root"/>
+	<dep from="7" to="5" type="det"/>
+	<dep from="7" to="6" type="amod"/>
+	<dep from="4" to="7" type="dobj"/>
+	<dep from="4" to="8" type="prt"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Change_operational_state">
+			<lexicalUnit>
+				<token id="4"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="3"/>
+			</frameElement>
+			<frameElement type="Device">
+				<token id="5"/>
+				<token id="6"/>
+				<token id="7"/>
+			</frameElement>
+			<frameElement type="Operational_state">
+				<token id="8"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech7010440357548218058.wav"/>
+</audioFiles>
+</command>

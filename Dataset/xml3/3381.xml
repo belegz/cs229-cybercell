@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3381">
+<sentence>take the newspaper from the stand and put it on the coffee table</sentence>
+<tokens>
+	<token id="1" surface="take" pos="VB" lemma="take"/>
+	<token id="2" surface="the" pos="DT" lemma="the"/>
+	<token id="3" surface="newspaper" pos="NN" lemma="newspaper"/>
+	<token id="4" surface="from" pos="IN" lemma="from"/>
+	<token id="5" surface="the" pos="DT" lemma="the"/>
+	<token id="6" surface="stand" pos="NN" lemma="stand"/>
+	<token id="7" surface="and" pos="CC" lemma="and"/>
+	<token id="8" surface="put" pos="VBD" lemma="put"/>
+	<token id="9" surface="it" pos="PRP" lemma="it"/>
+	<token id="10" surface="on" pos="IN" lemma="on"/>
+	<token id="11" surface="the" pos="DT" lemma="the"/>
+	<token id="12" surface="coffee" pos="NN" lemma="coffee"/>
+	<token id="13" surface="table" pos="NN" lemma="table"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="3" to="2" type="det"/>
+	<dep from="1" to="3" type="dobj"/>
+	<dep from="1" to="4" type="prep"/>
+	<dep from="6" to="5" type="det"/>
+	<dep from="4" to="6" type="pobj"/>
+	<dep from="1" to="7" type="cc"/>
+	<dep from="1" to="8" type="conj"/>
+	<dep from="8" to="9" type="dobj"/>
+	<dep from="8" to="10" type="prep"/>
+	<dep from="13" to="11" type="det"/>
+	<dep from="13" to="12" type="nn"/>
+	<dep from="10" to="13" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Taking">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="2"/>
+				<token id="3"/>
+			</frameElement>
+			<frameElement type="Source">
+				<token id="4"/>
+				<token id="5"/>
+				<token id="6"/>
+			</frameElement>
+		</frame>
+		<frame name="Placing">
+			<lexicalUnit>
+				<token id="8"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="9"/>
+			</frameElement>
+			<frameElement type="Goal">
+				<token id="10"/>
+				<token id="11"/>
+				<token id="12"/>
+				<token id="13"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech5949835191152533140.wav"/>
+	<file name="speech3227752018387479745.wav"/>
+</audioFiles>
+</command>

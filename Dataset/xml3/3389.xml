@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3389">
+<sentence>turn on the television</sentence>
+<tokens>
+	<token id="1" surface="turn" pos="VB" lemma="turn"/>
+	<token id="2" surface="on" pos="RP" lemma="on"/>
+	<token id="3" surface="the" pos="DT" lemma="the"/>
+	<token id="4" surface="television" pos="NN" lemma="television"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="1" to="2" type="prt"/>
+	<dep from="4" to="3" type="det"/>
+	<dep from="1" to="4" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Change_operational_state">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Operational_state">
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Device">
+				<token id="3"/>
+				<token id="4"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech7590844294596223982.wav"/>
+	<file name="speech6658393623107158688.wav"/>
+</audioFiles>
+</command>

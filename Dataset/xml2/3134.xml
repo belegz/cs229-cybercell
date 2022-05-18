@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3134">
+<sentence>take the apple jam jar</sentence>
+<tokens>
+	<token id="1" surface="take" pos="VB" lemma="take"/>
+	<token id="2" surface="the" pos="DT" lemma="the"/>
+	<token id="3" surface="apple" pos="NN" lemma="apple"/>
+	<token id="4" surface="jam" pos="NN" lemma="jam"/>
+	<token id="5" surface="jar" pos="NN" lemma="jar"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="5" to="2" type="det"/>
+	<dep from="5" to="3" type="nn"/>
+	<dep from="5" to="4" type="nn"/>
+	<dep from="1" to="5" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Taking">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="2"/>
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="amy_13.wav"/>
+	<file name="ilary_43.wav"/>
+</audioFiles>
+</command>

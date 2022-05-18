@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3349">
+<sentence>please pick up the phone</sentence>
+<tokens>
+	<token id="1" surface="please" pos="UH" lemma="please"/>
+	<token id="2" surface="pick" pos="VB" lemma="pick"/>
+	<token id="3" surface="up" pos="RP" lemma="up"/>
+	<token id="4" surface="the" pos="DT" lemma="the"/>
+	<token id="5" surface="phone" pos="NN" lemma="phone"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="discourse"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="2" to="3" type="prt"/>
+	<dep from="5" to="4" type="det"/>
+	<dep from="2" to="5" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Taking">
+			<lexicalUnit>
+				<token id="2"/>
+				<token id="3"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="4"/>
+				<token id="5"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech6857576131066848554.wav"/>
+</audioFiles>
+</command>

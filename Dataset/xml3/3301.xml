@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3301">
+<sentence>check if the stereo is on</sentence>
+<tokens>
+	<token id="1" surface="check" pos="VB" lemma="check"/>
+	<token id="2" surface="if" pos="IN" lemma="if"/>
+	<token id="3" surface="the" pos="DT" lemma="the"/>
+	<token id="4" surface="stereo" pos="NN" lemma="stereo"/>
+	<token id="5" surface="is" pos="VBZ" lemma="be"/>
+	<token id="6" surface="on" pos="RP" lemma="on"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="6" to="2" type="mark"/>
+	<dep from="4" to="3" type="det"/>
+	<dep from="6" to="4" type="nsubj"/>
+	<dep from="6" to="5" type="cop"/>
+	<dep from="1" to="6" type="ccomp"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Inspecting">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Ground">
+				<token id="3"/>
+				<token id="4"/>
+			</frameElement>
+			<frameElement type="Desired_state">
+				<token id="5"/>
+				<token id="6"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech7678519866799570584.wav"/>
+</audioFiles>
+</command>

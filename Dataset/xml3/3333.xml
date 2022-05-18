@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3333">
+<sentence>i want to watch tv bring me the remote</sentence>
+<tokens>
+	<token id="1" surface="i" pos="LS" lemma="i"/>
+	<token id="2" surface="want" pos="VB" lemma="want"/>
+	<token id="3" surface="to" pos="TO" lemma="to"/>
+	<token id="4" surface="watch" pos="VB" lemma="watch"/>
+	<token id="5" surface="tv" pos="NN" lemma="tv"/>
+	<token id="6" surface="bring" pos="VB" lemma="bring"/>
+	<token id="7" surface="me" pos="PRP" lemma="I"/>
+	<token id="8" surface="the" pos="DT" lemma="the"/>
+	<token id="9" surface="remote" pos="JJ" lemma="remote"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="nsubj"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="4" to="3" type="aux"/>
+	<dep from="2" to="4" type="xcomp"/>
+	<dep from="6" to="5" type="nsubj"/>
+	<dep from="2" to="6" type="conj"/>
+	<dep from="6" to="7" type="iobj"/>
+	<dep from="9" to="8" type="det"/>
+	<dep from="6" to="9" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="6"/>
+			</lexicalUnit>
+			<frameElement type="Beneficiary">
+				<token id="7"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="8"/>
+				<token id="9"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech5989912063512189974.wav"/>
+</audioFiles>
+</command>

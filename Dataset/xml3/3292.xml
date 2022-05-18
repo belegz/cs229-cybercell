@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3292">
+<sentence>bring over the gray folder</sentence>
+<tokens>
+	<token id="1" surface="bring" pos="VB" lemma="bring"/>
+	<token id="2" surface="over" pos="RP" lemma="over"/>
+	<token id="3" surface="the" pos="DT" lemma="the"/>
+	<token id="4" surface="gray" pos="JJ" lemma="gray"/>
+	<token id="5" surface="folder" pos="NN" lemma="folder"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="1" to="2" type="prt"/>
+	<dep from="5" to="3" type="det"/>
+	<dep from="5" to="4" type="amod"/>
+	<dep from="1" to="5" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Area">
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech753701920524405761.wav"/>
+	<file name="speech2027822744141486987.wav"/>
+</audioFiles>
+</command>

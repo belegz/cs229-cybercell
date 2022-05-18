@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3126">
+<sentence>search for the scissors they should be in the blue drawer</sentence>
+<tokens>
+	<token id="1" surface="search" pos="VB" lemma="search"/>
+	<token id="2" surface="for" pos="IN" lemma="for"/>
+	<token id="3" surface="the" pos="DT" lemma="the"/>
+	<token id="4" surface="scissors" pos="NNS" lemma="scissors"/>
+	<token id="5" surface="they" pos="PRP" lemma="they"/>
+	<token id="6" surface="should" pos="MD" lemma="should"/>
+	<token id="7" surface="be" pos="VB" lemma="be"/>
+	<token id="8" surface="in" pos="IN" lemma="in"/>
+	<token id="9" surface="the" pos="DT" lemma="the"/>
+	<token id="10" surface="blue" pos="JJ" lemma="blue"/>
+	<token id="11" surface="drawer" pos="NN" lemma="drawer"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="1" to="2" type="prep"/>
+	<dep from="4" to="3" type="det"/>
+	<dep from="2" to="4" type="pobj"/>
+	<dep from="7" to="5" type="nsubj"/>
+	<dep from="7" to="6" type="aux"/>
+	<dep from="1" to="7" type="conj"/>
+	<dep from="7" to="8" type="prep"/>
+	<dep from="11" to="9" type="det"/>
+	<dep from="11" to="10" type="amod"/>
+	<dep from="8" to="11" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Searching">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Phenomenon">
+				<token id="2"/>
+				<token id="3"/>
+				<token id="4"/>
+			</frameElement>
+		</frame>
+		<frame name="Being_located">
+			<lexicalUnit>
+				<token id="7"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="5"/>
+			</frameElement>
+			<frameElement type="Location">
+				<token id="8"/>
+				<token id="9"/>
+				<token id="10"/>
+				<token id="11"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="amy_27.wav"/>
+	<file name="ilary_57.wav"/>
+</audioFiles>
+</command>

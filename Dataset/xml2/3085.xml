@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3085">
+<sentence>i want some fruit bring me an apple or an orange</sentence>
+<tokens>
+	<token id="1" surface="i" pos="PRP" lemma="I"/>
+	<token id="2" surface="want" pos="VB" lemma="want"/>
+	<token id="3" surface="some" pos="DT" lemma="some"/>
+	<token id="4" surface="fruit" pos="NN" lemma="fruit"/>
+	<token id="5" surface="bring" pos="VB" lemma="bring"/>
+	<token id="6" surface="me" pos="PRP" lemma="I"/>
+	<token id="7" surface="an" pos="DT" lemma="a"/>
+	<token id="8" surface="apple" pos="NN" lemma="apple"/>
+	<token id="9" surface="or" pos="CC" lemma="or"/>
+	<token id="10" surface="an" pos="DT" lemma="a"/>
+	<token id="11" surface="orange" pos="NN" lemma="orange"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="nsubj"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="4" to="3" type="det"/>
+	<dep from="5" to="4" type="nsubj"/>
+	<dep from="2" to="5" type="conj"/>
+	<dep from="8" to="6" type="nsubj"/>
+	<dep from="8" to="7" type="det"/>
+	<dep from="5" to="8" type="xcomp"/>
+	<dep from="8" to="9" type="cc"/>
+	<dep from="11" to="10" type="det"/>
+	<dep from="8" to="11" type="conj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="5"/>
+			</lexicalUnit>
+			<frameElement type="Beneficiary">
+				<token id="6"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="7"/>
+				<token id="8"/>
+				<token id="9"/>
+				<token id="10"/>
+				<token id="11"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="tristan_29.wav"/>
+	<file name="ilary_29.wav"/>
+</audioFiles>
+</command>

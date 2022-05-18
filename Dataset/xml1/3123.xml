@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3123">
+<sentence>robot why do n't you go around and search for my hat</sentence>
+<tokens>
+	<token id="1" surface="robot" pos="NN" lemma="robot"/>
+	<token id="2" surface="why" pos="WRB" lemma="why"/>
+	<token id="3" surface="do" pos="VB" lemma="do"/>
+	<token id="4" surface="n't" pos="RB" lemma="not"/>
+	<token id="5" surface="you" pos="PRP" lemma="you"/>
+	<token id="6" surface="go" pos="VB" lemma="go"/>
+	<token id="7" surface="around" pos="RB" lemma="around"/>
+	<token id="8" surface="and" pos="CC" lemma="and"/>
+	<token id="9" surface="search" pos="VB" lemma="search"/>
+	<token id="10" surface="for" pos="IN" lemma="for"/>
+	<token id="11" surface="my" pos="PRP$" lemma="my"/>
+	<token id="12" surface="hat" pos="NN" lemma="hat"/>
+</tokens>
+<dependencies>
+	<dep from="6" to="1" type="nsubj"/>
+	<dep from="3" to="2" type="advmod"/>
+	<dep from="1" to="3" type="rcmod"/>
+	<dep from="3" to="4" type="neg"/>
+	<dep from="3" to="5" type="dep"/>
+	<dep from="0" to="6" type="root"/>
+	<dep from="6" to="7" type="advmod"/>
+	<dep from="6" to="8" type="cc"/>
+	<dep from="6" to="9" type="conj"/>
+	<dep from="9" to="10" type="prep"/>
+	<dep from="12" to="11" type="poss"/>
+	<dep from="10" to="12" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Motion">
+			<lexicalUnit>
+				<token id="6"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="5"/>
+			</frameElement>
+			<frameElement type="Area">
+				<token id="7"/>
+			</frameElement>
+		</frame>
+		<frame name="Searching">
+			<lexicalUnit>
+				<token id="9"/>
+			</lexicalUnit>
+			<frameElement type="Phenomenon">
+				<token id="10"/>
+				<token id="11"/>
+				<token id="12"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="steve_26.wav"/>
+	<file name="ilary_56.wav"/>
+</audioFiles>
+</command>

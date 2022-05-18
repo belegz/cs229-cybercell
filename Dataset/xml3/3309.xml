@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3309">
+<sentence>could you please turn on the tv</sentence>
+<tokens>
+	<token id="1" surface="could" pos="MD" lemma="could"/>
+	<token id="2" surface="you" pos="PRP" lemma="you"/>
+	<token id="3" surface="please" pos="UH" lemma="please"/>
+	<token id="4" surface="turn" pos="VB" lemma="turn"/>
+	<token id="5" surface="on" pos="RP" lemma="on"/>
+	<token id="6" surface="the" pos="DT" lemma="the"/>
+	<token id="7" surface="tv" pos="NN" lemma="tv"/>
+</tokens>
+<dependencies>
+	<dep from="4" to="1" type="aux"/>
+	<dep from="4" to="2" type="nsubj"/>
+	<dep from="4" to="3" type="discourse"/>
+	<dep from="0" to="4" type="root"/>
+	<dep from="4" to="5" type="prt"/>
+	<dep from="7" to="6" type="det"/>
+	<dep from="4" to="7" type="dojb"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Change_operational_state">
+			<lexicalUnit>
+				<token id="4"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Operational_state">
+				<token id="5"/>
+			</frameElement>
+			<frameElement type="Device">
+				<token id="6"/>
+				<token id="7"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech1125824766726599344.wav"/>
+</audioFiles>
+</command>

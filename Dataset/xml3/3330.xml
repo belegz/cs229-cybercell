@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3330">
+<sentence>i need some utensils could you take me some</sentence>
+<tokens>
+	<token id="1" surface="i" pos="FW" lemma="i"/>
+	<token id="2" surface="need" pos="VB" lemma="need"/>
+	<token id="3" surface="some" pos="DT" lemma="some"/>
+	<token id="4" surface="utensils" pos="NNS" lemma="utensil"/>
+	<token id="5" surface="could" pos="MD" lemma="could"/>
+	<token id="6" surface="you" pos="PRP" lemma="you"/>
+	<token id="7" surface="take" pos="VB" lemma="take"/>
+	<token id="8" surface="me" pos="PRP" lemma="I"/>
+	<token id="9" surface="some" pos="DT" lemma="some"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="nsubj"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="4" to="3" type="det"/>
+	<dep from="2" to="4" type="dojb"/>
+	<dep from="7" to="5" type="aux"/>
+	<dep from="7" to="6" type="nsubj"/>
+	<dep from="2" to="7" type="conj"/>
+	<dep from="7" to="8" type="iobj"/>
+	<dep from="7" to="9" type="dojb"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="7"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="6"/>
+			</frameElement>
+			<frameElement type="Beneficiary">
+				<token id="8"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="9"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech5152228633034331021.wav"/>
+</audioFiles>
+</command>

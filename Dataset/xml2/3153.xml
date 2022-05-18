@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3153">
+<sentence>there 's a yellow jacket in the dining room can you bring it to me</sentence>
+<tokens>
+	<token id="1" surface="there" pos="EX" lemma="there"/>
+	<token id="2" surface="'s" pos="VBZ" lemma="be"/>
+	<token id="3" surface="a" pos="DT" lemma="a"/>
+	<token id="4" surface="yellow" pos="JJ" lemma="yellow"/>
+	<token id="5" surface="jacket" pos="NN" lemma="jacket"/>
+	<token id="6" surface="in" pos="IN" lemma="in"/>
+	<token id="7" surface="the" pos="DT" lemma="the"/>
+	<token id="8" surface="dining" pos="NN" lemma="dining"/>
+	<token id="9" surface="room" pos="NN" lemma="room"/>
+	<token id="10" surface="can" pos="MD" lemma="can"/>
+	<token id="11" surface="you" pos="PRP" lemma="you"/>
+	<token id="12" surface="bring" pos="VB" lemma="bring"/>
+	<token id="13" surface="it" pos="PRP" lemma="it"/>
+	<token id="14" surface="to" pos="TO" lemma="to"/>
+	<token id="15" surface="me" pos="PRP" lemma="I"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="expl"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="5" to="3" type="det"/>
+	<dep from="5" to="4" type="amod"/>
+	<dep from="2" to="5" type="nsubj"/>
+	<dep from="2" to="6" type="prep"/>
+	<dep from="9" to="7" type="det"/>
+	<dep from="9" to="8" type="nn"/>
+	<dep from="6" to="9" type="pobj"/>
+	<dep from="12" to="10" type="aux"/>
+	<dep from="12" to="11" type="nsubj"/>
+	<dep from="2" to="12" type="conj"/>
+	<dep from="12" to="13" type="dobj"/>
+	<dep from="12" to="14" type="prep"/>
+	<dep from="14" to="15" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Being_located">
+			<lexicalUnit>
+				<token id="1"/>
+				<token id="2"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+			</frameElement>
+			<frameElement type="Location">
+				<token id="6"/>
+				<token id="7"/>
+				<token id="8"/>
+				<token id="9"/>
+			</frameElement>
+		</frame>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="12"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="11"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="13"/>
+			</frameElement>
+			<frameElement type="Beneficiary">
+				<token id="14"/>
+				<token id="15"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="maria_26.wav"/>
+	<file name="ilary_26.wav"/>
+</audioFiles>
+</command>

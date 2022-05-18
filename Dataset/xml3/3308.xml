@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3308">
+<sentence>could you pick up the telephone</sentence>
+<tokens>
+	<token id="1" surface="could" pos="MD" lemma="could"/>
+	<token id="2" surface="you" pos="PRP" lemma="you"/>
+	<token id="3" surface="pick" pos="VB" lemma="pick"/>
+	<token id="4" surface="up" pos="RP" lemma="up"/>
+	<token id="5" surface="the" pos="DT" lemma="the"/>
+	<token id="6" surface="telephone" pos="NN" lemma="telephone"/>
+</tokens>
+<dependencies>
+	<dep from="3" to="1" type="aux"/>
+	<dep from="3" to="2" type="nsubj"/>
+	<dep from="0" to="3" type="root"/>
+	<dep from="3" to="4" type="prt"/>
+	<dep from="6" to="5" type="det"/>
+	<dep from="3" to="6" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Taking">
+			<lexicalUnit>
+				<token id="3"/>
+				<token id="4"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="5"/>
+				<token id="6"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech5120977242633678924.wav"/>
+</audioFiles>
+</command>

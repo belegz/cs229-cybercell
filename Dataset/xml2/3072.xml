@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3072">
+<sentence>go next to the tv set</sentence>
+<tokens>
+	<token id="1" surface="go" pos="VB" lemma="go"/>
+	<token id="2" surface="next" pos="JJ" lemma="next"/>
+	<token id="3" surface="to" pos="TO" lemma="to"/>
+	<token id="4" surface="the" pos="DT" lemma="the"/>
+	<token id="5" surface="tv" pos="NN" lemma="tv"/>
+	<token id="6" surface="set" pos="NN" lemma="set"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="1" to="2" type="advmod"/>
+	<dep from="2" to="3" type="prep"/>
+	<dep from="6" to="4" type="det"/>
+	<dep from="6" to="5" type="nn"/>
+	<dep from="3" to="6" type="pobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Motion">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Goal">
+				<token id="2"/>
+				<token id="3"/>
+				<token id="4"/>
+				<token id="5"/>
+				<token id="6"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="amy_10.wav"/>
+	<file name="ilary_10.wav"/>
+</audioFiles>
+</command>

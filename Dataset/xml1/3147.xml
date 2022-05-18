@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3147">
+<sentence>take the salt box</sentence>
+<tokens>
+	<token id="1" surface="take" pos="VB" lemma="take"/>
+	<token id="2" surface="the" pos="DT" lemma="the"/>
+	<token id="3" surface="salt" pos="NN" lemma="salt"/>
+	<token id="4" surface="box" pos="NN" lemma="box"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="4" to="2" type="det"/>
+	<dep from="4" to="3" type="nn"/>
+	<dep from="1" to="4" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Taking">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Theme">
+				<token id="2"/>
+				<token id="3"/>
+				<token id="4"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="maria_07.wav"/>
+	<file name="ilary_37.wav"/>
+</audioFiles>
+</command>

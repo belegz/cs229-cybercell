@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3083">
+<sentence>i need my watch find it please</sentence>
+<tokens>
+	<token id="1" surface="i" pos="PRP" lemma="I"/>
+	<token id="2" surface="need" pos="VB" lemma="need"/>
+	<token id="3" surface="my" pos="PRP$" lemma="my"/>
+	<token id="4" surface="watch" pos="NN" lemma="watch"/>
+	<token id="5" surface="find" pos="VB" lemma="find"/>
+	<token id="6" surface="it" pos="PRP" lemma="it"/>
+	<token id="7" surface="please" pos="UH" lemma="please"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="nsubj"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="4" to="3" type="poss"/>
+	<dep from="5" to="4" type="nsubj"/>
+	<dep from="2" to="5" type="conj"/>
+	<dep from="7" to="6" type="nsubj"/>
+	<dep from="2" to="7" type="discourse"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Searching">
+			<lexicalUnit>
+				<token id="5"/>
+			</lexicalUnit>
+			<frameElement type="Phenomenon">
+				<token id="6"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="tristan_26.wav"/>
+</audioFiles>
+</command>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3332">
+<sentence>i want to jump in the shower can you turn it on</sentence>
+<tokens>
+	<token id="1" surface="i" pos="LS" lemma="i"/>
+	<token id="2" surface="want" pos="VB" lemma="want"/>
+	<token id="3" surface="to" pos="TO" lemma="to"/>
+	<token id="4" surface="jump" pos="VB" lemma="jump"/>
+	<token id="5" surface="in" pos="IN" lemma="in"/>
+	<token id="6" surface="the" pos="DT" lemma="the"/>
+	<token id="7" surface="shower" pos="NN" lemma="shower"/>
+	<token id="8" surface="can" pos="MD" lemma="can"/>
+	<token id="9" surface="you" pos="PRP" lemma="you"/>
+	<token id="10" surface="turn" pos="VB" lemma="turn"/>
+	<token id="11" surface="it" pos="PRP" lemma="it"/>
+	<token id="12" surface="on" pos="RP" lemma="on"/>
+</tokens>
+<dependencies>
+	<dep from="2" to="1" type="nsubj"/>
+	<dep from="0" to="2" type="root"/>
+	<dep from="4" to="3" type="aux"/>
+	<dep from="2" to="4" type="xcomp"/>
+	<dep from="4" to="5" type="prep"/>
+	<dep from="7" to="6" type="det"/>
+	<dep from="5" to="7" type="pobj"/>
+	<dep from="10" to="8" type="aux"/>
+	<dep from="10" to="9" type="nsubj"/>
+	<dep from="2" to="10" type="conj"/>
+	<dep from="10" to="11" type="dobj"/>
+	<dep from="10" to="12" type="prt"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Change_operational_state">
+			<lexicalUnit>
+				<token id="10"/>
+			</lexicalUnit>
+			<frameElement type="Agent">
+				<token id="9"/>
+			</frameElement>
+			<frameElement type="Device">
+				<token id="11"/>
+			</frameElement>
+			<frameElement type="Operational_state">
+				<token id="12"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="speech5905316916282343254.wav"/>
+</audioFiles>
+</command>

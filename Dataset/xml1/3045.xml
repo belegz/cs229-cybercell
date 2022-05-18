@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<command id="3045">
+<sentence>bring us some mustard</sentence>
+<tokens>
+	<token id="1" surface="bring" pos="VB" lemma="bring"/>
+	<token id="2" surface="us" pos="PRP" lemma="we"/>
+	<token id="3" surface="some" pos="DT" lemma="some"/>
+	<token id="4" surface="mustard" pos="NN" lemma="mustard"/>
+</tokens>
+<dependencies>
+	<dep from="0" to="1" type="root"/>
+	<dep from="1" to="2" type="iobj"/>
+	<dep from="4" to="3" type="det"/>
+	<dep from="1" to="4" type="dobj"/>
+</dependencies>
+<semantics>
+	<frameSemantics>
+		<frame name="Bringing">
+			<lexicalUnit>
+				<token id="1"/>
+			</lexicalUnit>
+			<frameElement type="Beneficiary">
+				<token id="2"/>
+			</frameElement>
+			<frameElement type="Theme">
+				<token id="3"/>
+				<token id="4"/>
+			</frameElement>
+		</frame>
+	</frameSemantics>
+	<spatialSemantics>
+	</spatialSemantics>
+</semantics>
+<audioFiles>
+	<file name="tristan_08.wav"/>
+</audioFiles>
+</command>
