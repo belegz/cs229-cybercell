@@ -69,7 +69,8 @@ if __name__ == '__main__':
                 action_words = input("Cyber-Cell:\nPlease provide a key word in your command: \n")
                 for i in range(MAX_CYCLE_NUM):
                     # np.savetxt(savepath,np.asarray([message]),fmt='%s')
-                    # TODO: implement what we want to do with action words
+                    # TODO: implement what we want to do with action words 
+                    # add action word to dictionary
                     keywords = predict_command(savefolder)
                     new_msg = msg_analysis(keywords)
                     # get good result
