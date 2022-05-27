@@ -73,7 +73,7 @@ else:
 
 #logging.info("Loading dataset...")
 
-def predict_command(path):
+def predict_command(path,com_list):
 
 #    data = DATASET(DATASET_FOLDER)
     data = DATASET(path)
@@ -109,5 +109,9 @@ def predict_command(path):
     obtained_words_top = postprocessing.get_top_words(test_doc, output, 5)
     print("obtained_words_top",obtained_words_top)
 
-    return obtained_words['command']
+    msg = []
+    for i in range(len(com_list)):
+        msg.append(obtained_words[com_list[i]])
+
+    return msg
 #predict_command(DATASET_FOLDER)
