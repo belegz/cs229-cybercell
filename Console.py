@@ -40,15 +40,19 @@ def command_detect(message,dic_path,path):
     print("prediction",prediction)
 
 #    new_msg = []
+    com_list = []
     for i in range(len(prediction)):
         if prediction[i] > 0:
             print(message[i])
 #            new_msg.append(message[i]) 
-            print("path",path)
+#            print("path",path)
             savepath = path + 'command' + str(i) + '.abstr'
             np.savetxt(savepath,np.asarray([message[i]]),fmt='%s')
             savepath2 = path + 'command' + str(i) + '.uncontr'
             np.savetxt(savepath2,np.asarray([temp_msg]),fmt='%s')
+            com_list.append('command' + str(i))
+
+    return com_list
 
 def msg_pre_procss(message):
 #    message = message + '\n'
@@ -69,12 +73,14 @@ def msg_analysis(message):
 #    print("message",len(message),message)
 
     new_msg = 'Robot:\nDo you mean:'
-
-    for i in range(len(message)):
-#        print("len(message[i])",len(message[i]))
-        list_msg = message[i]
-        for j in range (len(list_msg)):
-            new_msg = new_msg + list_msg[j] + ' '
+#    print("len(message)",len(message))
+    for k in range(len(message)):
+        msg_item = message[k]
+        for i in range(len(msg_item)):
+#            print("len(msg_item)",len(msg_item))
+            list_msg = msg_item[i]
+            for j in range (len(list_msg)):
+                new_msg = new_msg + list_msg[j] + ' '
 
     new_msg = new_msg + '?' + '\n'
     return new_msg
@@ -88,13 +94,13 @@ if __name__ == '__main__':
             message = input("Robot:\nHuman, please input your command: \n")
 
             message = msg_pre_procss(message)
-            new_msg = command_detect(message,dic_path,savepath)
-#            print(test)
+            com_list = command_detect(message,dic_path,savepath)
+            print("com_list",com_list)
 
 #            print("test_doc_str",test_doc_str)
 #            np.savetxt(savepath,np.asarray([message]),fmt='%s')
 
-            keywords = predict_command(savefolder)
+            keywords = predict_command(savefolder,com_list)
             print("keywords",keywords)
             new_msg = msg_analysis(keywords)
 
