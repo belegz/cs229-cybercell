@@ -4,7 +4,11 @@ import numpy as np
 import json
 import string
 
-def load_spam_dataset(tsv_path):
+motion_dic = {0:'go',1:'bring',2:'put',3:'find',4:'move',5:'search',6:'take',7:'think',8:'drop',9:'remove',10:'switch',11:'grab',12:'want',13:'let',14:'look',15:'control',16:'release',17:'need',18:'listen',19:'be',20:'turn',21:'clean',22:'feed',23:'lift'}
+word_dic_path = './com_tr/command_dictionary'
+enable_debug = True
+
+def load_command_dataset(tsv_path):
     """Load the spam dataset from a TSV file
 
     Args:
@@ -28,6 +32,31 @@ def load_spam_dataset(tsv_path):
 
     return messages, np.array(labels)
 
+def load_com_dataset(tsv_path):
+    """Load the spam dataset from a TSV file
+
+    Args:
+         csv_path: Path to TSV file containing dataset.
+
+    Returns:
+        messages: A list of string values containing the text of each message.
+        labels: The binary labels (0 or 1) for each message. A 1 indicates spam.
+    """
+
+    messages = []
+    labels = []
+
+    with open(tsv_path, 'r', newline='', encoding='utf8') as tsv_file:
+        reader = csv.reader(tsv_file, delimiter='\t')
+
+        for label, message in reader:
+#            print("label, message",label, message)
+            messages.append(message)
+            labels.append(label)
+
+    return messages, labels
+
+
 def write_json(filename, value):
     """Write the provided value as JSON to the given filename"""
     with open(filename, 'w') as f:
@@ -48,12 +77,15 @@ def get_words(message):
     """
 
     # *** START CODE HERE ***
-
-    msg = message.split(' ')
+    msg = message.strip()
+    msg = msg.split(' ')
+ #   print("msg",msg)
+#    msg = msg.replace('\r\nham\t',' ')
+#    msg = message.split(' ')
 #    msg = message.translate(str.maketrans('', '', string.punctuation))
 #    msg = [s.translate(str.maketrans('', '', '!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~')) for s in msg]
-    
 #    print("msg",len(msg),msg)
+    
     return [s.lower() for s in msg]
 
     # *** END CODE HERE ***
@@ -77,7 +109,7 @@ def create_dictionary(messages):
 
     # *** START CODE HERE ***
 #    occ_count = 5
-    occ_count = 2
+    occ_count = 1
     new_msg = []
     dic_key = 0
     dict = {}
@@ -244,7 +276,7 @@ def predict_from_naive_bayes_model(model, matrix,training=True):
 
     Returns: A numpy array containg the predictions from the model
     """
-    # *** START CODE HERE ***
+
     if training:
         Fi_y = model[0]
         Fi_y_pos = model[1]
@@ -287,53 +319,218 @@ def predict_from_naive_bayes_model(model, matrix,training=True):
 
     return prediction
 
-    # *** END CODE HERE ***
+
+def load_word_dic():
+    tf = open(word_dic_path, "r")
+    word_dictionary = json.load(tf)
+#    print("word_dictionary",word_dictionary)
+
+    word_dict = {}
+    for key, value in word_dictionary.items():
+        word_dict[int(key)] = value
+
+    return word_dict
+
+def fit_motion_matrix():
+
+    train_messages, train_labels = load_com_dataset('./com_tr/motion_train2.tsv')
+    if enable_debug:
+        print("train_messages",train_messages)
+        print("train_labels",train_labels)
+
+    word_dict = load_word_dic()
+
+    dimi = len(motion_dic)
+    dimj = len(word_dict)
+    word_dic_values = list(word_dict.values())
+    mon_dic_values = list(motion_dic.values())
+
+    mo_obj_matrix = np.zeros((dimi,dimj))
+    mo_matrix = np.zeros((dimi))
+    obj_matrix = np.zeros((dimj))
+
+    for i in range(len(train_messages)):
+        message = get_words(train_messages[i])
+        if enable_debug:
+            print("message",len(message),message)
+
+        for j in range(len(message)):
+            if message[j] in mon_dic_values:
+                keyi = mon_dic_values.index(message[j])
+                if enable_debug:
+                    print("message[j],train_labels[i]",message[j],train_labels[i])
+                keyj = word_dic_values.index(train_labels[i])
+
+                mo_obj_matrix[keyi,keyj]+=1
+                mo_matrix[keyi] +=1
+                obj_matrix[keyj] +=1
+
+    mo_obj_model = {}
+    mo_obj_model['Fi_mo'] = mo_matrix.tolist()
+    mo_obj_model['Fi_obj'] = obj_matrix.tolist()
+    mo_obj_model['matrix'] = mo_obj_matrix.tolist()
+
+#    print("Fi_y_pos,Fi_y_neg",Fi_y_pos.shape,Fi_y_neg.shape)
+    write_json('./com_tr/mo_obj_model', mo_obj_model)
+
+def predict_motion_objective(input_msg='',training=True):
+    
+    tf = open("./com_tr/mo_obj_model", "r")
+    mo_obj_model = json.load(tf)
+
+    mo_matrix = np.array(mo_obj_model['Fi_mo'])
+    obj_matrix = np.array(mo_obj_model['Fi_obj'])
+    mo_obj_matrix = np.array(mo_obj_model['matrix'])
+
+    if training:
+        test_messages, test_labels = load_com_dataset('./com_tr/motion_test2.tsv')
+        if enable_debug:
+            print("test_messages",test_messages)
+            print("test_labels",test_labels)
+    else:
+        test_messages = input_msg
+
+    word_dict = load_word_dic()
+
+    dimi = len(motion_dic)
+    dimj = len(word_dict)
+    word_dic_values = list(word_dict.values())
+    mon_dic_values = list(motion_dic.values())
+    
+    is_motion = False
+    is_obj = False
+
+    if training:
+        value = []
+        for i in range(len(test_messages)):
+            message = get_words(test_messages[i])
+            if enable_debug:
+                print("message",message)
+            for j in range(len(message)):
+                if message[j] in mon_dic_values:
+                    keyi = mon_dic_values.index(message[j])
+                    is_motion = True
+                    if enable_debug:
+                        print("message[j],keyi",message[j],keyi)
+                    prob = np.zeros((dimj))
+                    for k in range(len(message)):
+                        if enable_debug:
+                            print("k,message[k]",k,message[k])
+                        if message[k] in word_dic_values:
+                            keyj = word_dic_values.index(message[k])
+                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+                        else:
+                            prob[keyj] = 0.
+
+                    if enable_debug:
+                        print("prob",prob)
+                    idx = np.argmax(prob)
+
+                    if prob[idx] > 0:
+                        is_obj = True
+                        if enable_debug:
+                            print("word_dict[idx]",word_dict[idx])
+                        value.append(word_dict[idx])
+
+    else:
+        for i in range(len(test_messages)):
+            message = get_words(test_messages[i])
+            if enable_debug:
+                print("message",message)
+            for j in range(len(message)):
+                if message[j] in mon_dic_values:
+                    keyi = mon_dic_values.index(message[j])
+                    is_motion = True
+                    if enable_debug:
+                        print("message[j],keyi",message[j],keyi)
+                    prob = np.zeros((dimj))
+                    for k in range(len(message)):
+                        if enable_debug:
+                            print("k,message[k]",k,message[k])
+                        if message[k] in word_dic_values:
+                            keyj = word_dic_values.index(message[k])
+                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+                        else:
+                            prob[keyj] = 0.
+
+                    if enable_debug:
+                        print("prob",prob)
+                    idx = np.argmax(prob)
+
+                    if prob[idx] > 0:
+                        is_obj = True
+                        if enable_debug:
+                            print("word_dict[idx]",word_dict[idx])
+
+                    return is_motion, motion_dic[keyi], is_obj, word_dict[idx],input_msg
+                else:
+                    return is_motion, '', is_obj, ''
+    if training:
+        print("value",value)
+        return value
+
+def predict_motion_objective_fd(input_msg,pred,fd_msg):
+    
+    tf = open("./com_tr/mo_obj_model", "r")
+    mo_obj_model = json.load(tf)
+
+    mo_matrix = np.array(mo_obj_model['Fi_mo'])
+    obj_matrix = np.array(mo_obj_model['Fi_obj'])
+    mo_obj_matrix = np.array(mo_obj_model['matrix'])
+
+    test_messages = input_msg
+
+    word_dict = load_word_dic()
+
+    dimi = len(motion_dic)
+    dimj = len(word_dict)
+    word_dic_values = list(word_dict.values())
+    mon_dic_values = list(motion_dic.values())
+    
+    is_motion = False
+    is_obj = False
+    if pred == 1:
+
+        if enable_debug:
+            print("input_msg",input_msg)
+            print("fd_msg",fd_msg)
+        message = get_words(test_messages[0])
+        if fd_msg in mon_dic_values:
+            keyi = mon_dic_values.index(fd_msg)
+            prob = np.zeros((dimj))
+            for k in range(len(message)):
+                if enable_debug:
+                    print("k,message[k]",k,message[k])
+                keyj = word_dic_values.index(message[k])
+                prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+
+            idx = np.argmax(prob)
+            if enable_debug:
+                print("prob, idx", prob,idx)
+
+            if prob[idx] > 0:
+                 is_obj = True
+                 if enable_debug:
+                     print("word_dict[idx]",word_dict[idx])
+
+            is_motion = True
+            return is_motion, fd_msg, is_obj, word_dict[idx]
+    else:
+        pass
 
 
-def get_top_five_naive_bayes_words(model, dictionary):
-    """Compute the top five words that are most indicative of the spam (i.e positive) class.
-
-    Ues the metric given in part-c as a measure of how indicative a word is.
-    Return the words in sorted form, with the most indicative word first.
-
-    Args:
-        model: The Naive Bayes model returned from fit_naive_bayes_model
-        dictionary: A mapping of word to integer ids
-
-    Returns: A list of the top five most indicative words in sorted order with the most indicative first
-    """
-    # *** START CODE HERE ***
-    Fi_y = model[0]
-    Fi_y_pos = model[1]
-    Fi_y_neg = model[2]
-
-    prob = np.zeros((len(dictionary)))
-    top5word = []
-    for i in range(len(dictionary)):
-        prob[i] = np.log(Fi_y_pos[i]/Fi_y_neg[i])
-#        print("i,prob[i]",i,prob[i])
-
-    idx = np.argsort(-prob)
-#    print("idx",idx)
-
-    for i in range(5):
-#        print("dictionary[idx[i]]",dictionary[idx[i]])
-        top5word.append(dictionary[idx[i]])
-
-    return top5word
-
-    # *** END CODE HERE ***
+    return is_motion, '', is_obj, ''
 
 
 def main():
 
-    train_messages, train_labels = load_spam_dataset('./com_tr/command_train.tsv')
+    train_messages, train_labels = load_command_dataset('./com_tr/command_train4.tsv')
 
 #    print("train_messages",len(train_messages), train_messages)
 #    print("train_labels",len(train_labels), train_labels)
 
 #    val_messages, val_labels = load_spam_dataset('./com_tr/command_val.tsv')
-    test_messages, test_labels = load_spam_dataset('./com_tr/command_test.tsv')
+    test_messages, test_labels = load_command_dataset('./com_tr/command_test.tsv')
 #    print("train_labels", train_labels,train_labels.shape[0],np.where(train_labels==1)[0])
 
     dictionary = create_dictionary(train_messages)
@@ -343,9 +540,6 @@ def main():
     write_json('./com_tr/command_dictionary', dictionary)
 
     train_matrix = transform_text(train_messages, dictionary)
-
-#    np.savetxt('spam_sample_train_matrix', train_matrix[:100,:])
-    np.savetxt('./com_tr/spam_sample_train_matrix', train_matrix[:100,:])
 
 #    val_matrix = transform_text(val_messages, dictionary)
     test_matrix = transform_text(test_messages, dictionary)
@@ -362,11 +556,8 @@ def main():
 
     print('Naive Bayes had an accuracy of {} on the testing set'.format(naive_bayes_accuracy))
 
-    top_5_words = get_top_five_naive_bayes_words(naive_bayes_model, dictionary)
-
-#    print('The top 5 indicative words for Naive Bayes are: ', top_5_words)
-
-#    write_json('./com_tr/spam_top_indicative_words', top_5_words)
+    fit_motion_matrix()
+    predict_motion_objective()
 
 if __name__ == "__main__":
     main()
