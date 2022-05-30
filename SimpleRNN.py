@@ -106,7 +106,7 @@ elif DATASET == Datasetnew:
     MAX_VOCABULARY_SIZE = 20000
     EMBEDDINGS_SIZE = 300
     BATCH_SIZE = 32
-    EPOCHS = 200
+    EPOCHS = 10
     KP_WEIGHT = 10
     STEM_MODE = metrics.stemMode.none
     STEM_TEST = False
@@ -169,17 +169,16 @@ if not SAVE_MODEL or not os.path.isfile(MODEL_PATH):
     model.add(Dropout(0.25))
     model.add(TimeDistributed(Dense(150, activation='relu', kernel_regularizer=regularizers.l2(0.01))))
     model.add(Dropout(0.25))
-    model.add(TimeDistributed(Dense(3, activation='softmax')))
+    model.add(TimeDistributed(Dense(2, activation='softmax')))
 
     logging.info("Compiling the network...")
     model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'],
                   sample_weight_mode="temporal")
     print(model.summary())
-
     metrics_callback = keras_metrics.MetricsCallback(val_x, val_y)
-
     logging.info("Fitting the network...")
 
+    print(train_y_weights.shape)
     history = model.fit(train_x, train_y,
                         validation_data=(val_x, val_y),
                         epochs=EPOCHS,
@@ -296,7 +295,7 @@ if DATASET == Semeval2017:
     from eval import anno_generator
 
     anno_generator.write_anno("/tmp/simplernn", test_doc_str, obtained_words)
-    from data.Semeval2017 import eval
+    # from data.Semeval2017 import eval
 
     eval.calculateMeasures("data/Semeval2017/test", "/tmp/simplernn-all", remove_anno=["types"])
 

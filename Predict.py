@@ -103,11 +103,11 @@ def predict_command(path,com_list):
 
     obtained_tokens = postprocessing.undo_sequential(output)
     obtained_words = postprocessing.get_words(test_doc, obtained_tokens)
-    print("obtained_words",obtained_words)
+    # print("obtained_words",obtained_words)
     clean_words = postprocessing.get_valid_patterns(obtained_words)
-    print("clean_words",clean_words)
+    # print("clean_words",clean_words)
     obtained_words_top = postprocessing.get_top_words(test_doc, output, 5)
-    print("obtained_words_top",obtained_words_top)
+    # print("obtained_words_top",obtained_words_top)
 
     msg = []
     for i in range(len(com_list)):

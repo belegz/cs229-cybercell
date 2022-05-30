@@ -1,8 +1,12 @@
 from bs4 import BeautifulSoup
 import numpy as np
 import os
+import numpy as np
+# from sklearn.model_selection import train_test_split
+from get_branch import *
+import splitfolders
 
-filepath = './Dataset/xml1/'
+filepath = './Dataset/'
 savepath = './Datasetnew/'
 #filename = '2337'
 
@@ -87,9 +91,38 @@ def get_nonkeyword(sentence,keyword):
 
     return non_keyword, str_array
 
+def get_augkeyword(Bs_data):
+    aug_keyword = []
+
+    separate = sentence[0].split(' ')
+#    print("separate",separate)
+    pos_list = get_poss(Bs_data)
+    det_list = get_det(Bs_data)
+    colon_list = []
+    # if len(pos_list) > 0 & len(det_list) > 0:
+
+    # str = ''
+    
+        # for i in range(len(separate)):
+
+        # if word in separate[i]:
+            # key = separate[i+1]
+#            print("key",key)
+            # keyword.append(dict[key])
+#            str = str + dict[key] + ' '
+         
+#    print("keyword",keyword)
+#    print("str",str)
+
+    # str = '; '.join(keyword)
+#    print("str",str)
+
+    # str_array = np.array([str])
+#    print("str_array",str_array)
+    # return keyword, str_array
 
 
-def save_file(b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
+def save_file(Bs_data, b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
 #    keyword_dict = get_dict(str(b_tokens),'token id=','lemma=')
 #    keyword,str = get_keyword(str(b_semantics),'token id=',keyword_dict)
 #    non_keyword,str_nonkey = get_nonkeyword(sentence,keyword)
@@ -101,6 +134,11 @@ def save_file(b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
     non_keyword,str_nonkey = get_nonkeyword(sentence,keyword)
 #    print("non_keyword",non_keyword)
 
+    get_augkeyword(Bs_data)
+    # aug_word,str_aug = get_augkeyword(Bs_data)
+    # print("aug_word",aug_word)
+    # print("aug_string", str_aug)
+
     #Add in files:
     savepath_sen = savepath + '.abstr'
     np.savetxt(savepath_sen,np.asarray(sentence),fmt='%s')
@@ -110,6 +148,9 @@ def save_file(b_tokens_con,b_semantics_con,sentence,word1,word2,savepath):
     np.savetxt(savepath_key,str_key,fmt='%s')
 
     savepath_nonkey = savepath + '.contr'
+
+    savepath_key = savepath + '.aug'
+    # np.savetxt(savepath_key,str_aug,fmt='%s')
 
 #    if len(non_keyword) > 0:
 #    np.savetxt(savepath_nonkey,str_nonkey,fmt='%s')
@@ -130,6 +171,7 @@ if __name__ == '__main__':
 
         # Finding sentence
         b_sentence = Bs_data.find_all('sentence')
+        print(b_sentence)
 
         sentence=[]
 #        sentence.append("command")
@@ -143,13 +185,14 @@ if __name__ == '__main__':
         b_semantics = Bs_data.find_all('semantics')
 #        print("b_tokens",b_tokens)
 
-        savefilepath = savepath+'/'+file.split('.')[0]
-#        print("savefilepath",savefilepath)
+        savefilepath = savepath+file.split('.')[0]
+        print("savefilepath",savefilepath)
 
 #        save_file(b_tokens,b_semantics,sentence,'token id=','lemma=',savefilepath)
-        save_file(b_tokens,b_semantics,sentence,'token id=','surface=',savefilepath)
+        save_file(Bs_data,b_tokens,b_semantics,sentence,'token id=','surface=',savefilepath)
         i=i+1
 
         #for debug
 #        if i ==3:
 #            break
+    # splitfolders.ratio('Datasetnew', output="output", seed=1337, ratio=(.8, 0.1,0.1)) 
