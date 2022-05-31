@@ -6,7 +6,7 @@ import string
 
 motion_dic = {0:'go',1:'bring',2:'put',3:'find',4:'move',5:'search',6:'take',7:'think',8:'drop',9:'remove',10:'switch',11:'grab',12:'want',13:'let',14:'look',15:'control',16:'release',17:'need',18:'listen',19:'be',20:'turn',21:'clean',22:'feed',23:'lift'}
 word_dic_path = './com_tr/command_dictionary'
-enable_debug = True
+enable_debug = False
 
 def load_command_dataset(tsv_path):
     """Load the spam dataset from a TSV file
@@ -396,7 +396,7 @@ def predict_motion_objective(input_msg='',training=True):
     dimj = len(word_dict)
     word_dic_values = list(word_dict.values())
     mon_dic_values = list(motion_dic.values())
-    
+
     is_motion = False
     is_obj = False
 
@@ -438,6 +438,8 @@ def predict_motion_objective(input_msg='',training=True):
             if enable_debug:
                 print("message",message)
             for j in range(len(message)):
+                if enable_debug:
+                    print("message[j]",message[j])
                 if message[j] in mon_dic_values:
                     keyi = mon_dic_values.index(message[j])
                     is_motion = True
@@ -463,11 +465,12 @@ def predict_motion_objective(input_msg='',training=True):
                             print("word_dict[idx]",word_dict[idx])
 
                     return is_motion, motion_dic[keyi], is_obj, word_dict[idx],input_msg
-                else:
-                    return is_motion, '', is_obj, ''
+
     if training:
         print("value",value)
         return value
+    else:
+        return is_motion, '', is_obj, '',input_msg
 
 def predict_motion_objective_fd(input_msg,pred,fd_msg):
     
@@ -501,8 +504,11 @@ def predict_motion_objective_fd(input_msg,pred,fd_msg):
             for k in range(len(message)):
                 if enable_debug:
                     print("k,message[k]",k,message[k])
-                keyj = word_dic_values.index(message[k])
-                prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+                if message[k] in word_dic_values:
+                    keyj = word_dic_values.index(message[k])
+                    prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+                else:
+                    prob[keyj] = 0.
 
             idx = np.argmax(prob)
             if enable_debug:
