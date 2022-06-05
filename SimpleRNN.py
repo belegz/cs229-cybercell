@@ -1,5 +1,6 @@
 import numpy as np
 import random as rn
+import matplotlib.pyplot as plt
 
 # The below is necessary in Python 3.2.3 onwards to
 # have reproducible behavior for certain hash-based operations.
@@ -46,7 +47,7 @@ info.log_versions()
 
 SAVE_MODEL = True
 MODEL_PATH = "models/simplernn.h5"
-SHOW_PLOTS = False
+SHOW_PLOTS = True
 
 # END GLOBAL VARIABLES
 
@@ -106,7 +107,7 @@ elif DATASET == Datasetnew:
     MAX_VOCABULARY_SIZE = 20000
     EMBEDDINGS_SIZE = 300
     BATCH_SIZE = 32
-    EPOCHS = 10
+    EPOCHS = 20
     KP_WEIGHT = 10
     STEM_MODE = metrics.stemMode.none
     STEM_TEST = False
@@ -203,6 +204,8 @@ else:
 logging.info("Predicting on test set...")
 output = model.predict(x=test_x, verbose=1)
 logging.debug("Shape of output array: %s", np.shape(output))
+resultsTest = model.evaluate(test_x, test_y)
+print("RESULT ACCURACY = ", resultsTest)
 
 obtained_tokens = postprocessing.undo_sequential(output)
 obtained_words = postprocessing.get_words(test_doc, obtained_tokens)

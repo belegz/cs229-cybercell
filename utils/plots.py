@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 
 
 def plot_accuracy(history) :
-    plt.plot(history.history['acc'])
-    plt.plot(history.history['val_acc'])
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
     plt.title('Model Accuracy over epochs')
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
