@@ -542,7 +542,7 @@ def predict_motion_objective_fd(input_msg,pred,fd_msg):
                         print("k,message[k]",k,message[k])
                     if message[k] in word_dic_values:
                         keyj = word_dic_values.index(message[k])
-                        prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+#                        prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
                         prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj]
                     else:
                         revise_dic = True

@@ -70,15 +70,15 @@ def msg_post_procss(is_motion, motion, is_obj, obj):
     if is_motion and is_obj:
 
         new_msg = '\nDo you mean:\n'
-        new_msg = new_msg + 'motion is: ' + ' '.join(motion) + '\n'
-        new_msg = new_msg + 'objective is: ' + ' '.join(obj) + '\n'
+        new_msg = new_msg + 'action is: ' + ' '.join(motion) + '\n'
+        new_msg = new_msg + 'object is: ' + ' '.join(obj) + '\n'
     elif is_motion:
         new_msg = '\nDo you mean:\n'
-        new_msg = new_msg + 'motion is: ' + ' '.join(motion) + '\n'
+        new_msg = new_msg + 'action is: ' + ' '.join(motion) + '\n'
         new_msg = new_msg + 'What is the object?' + '\n'
         need_feedback = 2
     else:
-        new_msg = '\nNot quite sure what you mean.\nWhat is the motion?\n'
+        new_msg = '\nNot quite sure what you mean.\nWhat is the action?\n'
         need_feedback = 1
 
     return need_feedback, new_msg
