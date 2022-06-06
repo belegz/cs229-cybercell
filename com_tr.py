@@ -3,6 +3,9 @@ import csv
 import numpy as np
 import json
 import string
+import os
+import warnings
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
 
 #motion_dic = {0:'go',1:'bring',2:'put',3:'find',4:'move',5:'search',6:'take',7:'think',8:'drop',9:'remove',10:'switch',11:'grab',12:'want',13:'let',14:'look',15:'control',16:'release',17:'send',18:'listen',19:'close',20:'turn',21:'clean',22:'feed',23:'lift'}
 word_dic_path = './com_tr/command_dictionary'
@@ -10,18 +13,11 @@ motion_dic_path = './com_tr/motion_dictionary'
 train_path = './com_tr/command_train3.tsv'
 test_path = './com_tr/command_test.tsv'
 com_model_path = './com_tr/command_model'
-enable_debug = True
+enable_debug = False
+os.environ['PYTHONHASHSEED'] = '0'
 
 def load_command_dataset(tsv_path):
-    """Load the command dataset from a TSV file
-
-    Args:
-         csv_path: Path to TSV file containing dataset.
-
-    Returns:
-        messages: A list of string values containing the text of each message.
-        labels: The binary labels (0 or 1) for each message. A 1 indicates spam.
-    """
+    #Load the command dataset from a TSV file
 
     messages = []
     labels = []
@@ -44,15 +40,7 @@ def load_command_dataset(tsv_path):
     return messages, np.array(labels)
 
 def load_com_dataset(tsv_path):
-    """Load the command_motion dataset from a TSV file
-
-    Args:
-         csv_path: Path to TSV file containing dataset.
-
-    Returns:
-        messages: A list of string values containing the text of each message.
-        labels: The binary labels (0 or 1) for each message. A 1 indicates spam.
-    """
+    #Load the command_motion dataset from a TSV file
 
     messages = []
     labels = []
@@ -74,6 +62,22 @@ def write_json(filename, value):
 
 def write_tsv(tsv_path, value):
     """Write the provided value as JSON to the given filename"""
+
+    data = value[1]
+    input_msg = data.split(' ')
+    if enable_debug:
+        print("input_msg",input_msg)
+
+    word_dict = load_word_dic(word_dic_path)
+    word_dic_values = list(word_dict.values())
+    for i in range(len(input_msg)):
+        if input_msg[i] not in word_dic_values:
+            add_dic(word_dict,input_msg[i])
+            word_dic_values = list(word_dict.values())
+
+    write_json(word_dic_path, word_dict)
+    train_com_detect(train_path,test_path)
+
     with open(tsv_path, 'a', newline='') as tsv_file:
         tsv_w = csv.writer(tsv_file,delimiter='\t')
         tsv_w.writerow(value)
@@ -85,64 +89,30 @@ def error_analysis(prediction, labels, test_messages):
     idx = np.where(diff!=0)[0]
     if enable_debug:
         print("idx",idx)
-    for i in range(len(idx)):
-        print("the predicted wrong items:", idx, test_messages[int(idx[i])])
+        for i in range(len(idx)):
+            print("the predicted wrong items:", idx, test_messages[int(idx[i])])
 
 def predict_analysis(prediction, labels, test_messages):
     """To verify which item was predicted wrong and print that item"""
     if enable_debug:
         print("labels",len(labels),labels)
         print("prediction",len(prediction),prediction)
-    for i in range(len(labels)):
-        if prediction[i]!=labels[i]:
-            print("the predicted wrong items:",i,test_messages[i])
+        for i in range(len(labels)):
+            if prediction[i]!=labels[i]:
+                print("the predicted wrong items:",i,test_messages[i])
 
 def get_words(message):
-    """Get the normalized list of words from a message string.
+    #Get the normalized list of words from a message string.
 
-    This function should split a message into words, normalize them, and return
-    the resulting list. For splitting, you should split on spaces. For normalization,
-    you should convert everything to lowercase.
-
-    Args:
-        message: A string containing an SMS message
-
-    Returns:
-       The list of normalized words from the message.
-    """
-
-    # *** START CODE HERE ***
     msg = message.strip()
     msg = msg.split(' ')
- #   print("msg",msg)
-#    msg = msg.replace('\r\nham\t',' ')
-#    msg = message.split(' ')
-#    msg = message.translate(str.maketrans('', '', string.punctuation))
-#    msg = [s.translate(str.maketrans('', '', '!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~')) for s in msg]
-#    print("msg",len(msg),msg)
     
     return [s.lower() for s in msg]
 
-    # *** END CODE HERE ***
-
 
 def create_dictionary(messages):
-    """Create a dictionary mapping words to integer indices.
+    #Create a dictionary mapping words to integer indices.
 
-    This function should create a dictionary of word to indices using the provided
-    training messages. Use get_words to process each message.
-
-    Rare words are often not useful for modeling. Please only add words to the dictionary
-    if they occur in at least five messages.
-
-    Args:
-        messages: A list of strings containing SMS messages
-
-    Returns:
-        A python dict mapping words to integers.
-    """
-
-    # *** START CODE HERE ***
 #    occ_count = 5
     occ_count = 1
     new_msg = []
@@ -177,30 +147,10 @@ def create_dictionary(messages):
 #    print("dict",len(dict),dict)
 
     return dict
-    # *** END CODE HERE ***
 
 
 def transform_text(messages, word_dictionary):
-    """Transform a list of text messages into a numpy array for further processing.
-
-    This function should create a numpy array that contains the number of times each word
-    of the vocabulary appears in each message. 
-    Each row in the resulting array should correspond to each message 
-    and each column should correspond to a word of the vocabulary.
-
-    Use the provided word dictionary to map words to column indices. Ignore words that
-    are not present in the dictionary. Use get_words to get the words for a message.
-
-    Args:
-        messages: A list of strings where each string is an SMS message.
-        word_dictionary: A python dict mapping words to integers.
-
-    Returns:
-        A numpy array marking the words present in each message.
-        Where the component (i,j) is the number of occurrences of the
-        j-th vocabulary word in the i-th message.
-    """
-    # *** START CODE HERE ***
+    #Transform a list of text messages into a numpy array for further processing.
 
     dimi = len(messages)
     dimj = len(word_dictionary)
@@ -308,17 +258,7 @@ def fit_naive_bayes_model(matrix, labels):
 
 
 def predict_from_naive_bayes_model(model, matrix,training=True):
-    """Use a Naive Bayes model to compute predictions for a target matrix.
-
-    This function should be able to predict on the models that fit_naive_bayes_model
-    outputs.
-
-    Args:
-        model: A trained model from fit_naive_bayes_model
-        matrix: A numpy array containing word counts
-
-    Returns: A numpy array containg the predictions from the model
-    """
+    #Use a Naive Bayes model to compute predictions for a target matrix.
 
     if training:
         Fi_y = model[0]
@@ -327,8 +267,8 @@ def predict_from_naive_bayes_model(model, matrix,training=True):
     else:
 #        print("model",model)
         Fi_y = model['Fi_y']
-        Fi_y_pos = np.array(model['Fi_y_pos'])
-        Fi_y_neg = np.array(model['Fi_y_neg'])
+        Fi_y_pos = np.array(model['Fi_y_pos'],dtype=object)
+        Fi_y_neg = np.array(model['Fi_y_neg'],dtype=object)
 
 #        print("Fi_y_pos,Fi_y_neg",Fi_y_pos.shape,Fi_y_neg.shape)
 #        print(test)
@@ -438,15 +378,16 @@ def fit_motion_matrix():
 
     if revise_dic:
         write_json(word_dic_path, word_dict)
+        train_com_detect(train_path,test_path)
 
 def predict_motion_objective(input_msg='',training=True):
     
     tf = open("./com_tr/mo_obj_model", "r")
     mo_obj_model = json.load(tf)
 
-    mo_matrix = np.array(mo_obj_model['Fi_mo'])
-    obj_matrix = np.array(mo_obj_model['Fi_obj'])
-    mo_obj_matrix = np.array(mo_obj_model['matrix'])
+    mo_matrix = np.array(mo_obj_model['Fi_mo'],dtype=object)
+    obj_matrix = np.array(mo_obj_model['Fi_obj'],dtype=object)
+    mo_obj_matrix = np.array(mo_obj_model['matrix'],dtype=object)
 
     if training:
         test_messages, test_labels = load_com_dataset('./com_tr/motion_test3.tsv')
@@ -486,7 +427,8 @@ def predict_motion_objective(input_msg='',training=True):
                             keyj = word_dic_values.index(message[k])
                             if enable_debug:
                                 print("mo_obj_matrix[keyi,keyj],obj_matrix[keyj],mo_matrix[keyi]",mo_obj_matrix[keyi,keyj],obj_matrix[keyj],mo_matrix[keyi])
-                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+#                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj]
                         else:
                             prob[keyj] = 0.
                             
@@ -532,7 +474,8 @@ def predict_motion_objective(input_msg='',training=True):
                             keyj = word_dic_values.index(message[k])
                             if enable_debug:
                                 print("mo_obj_matrix[keyi,keyj],obj_matrix[keyj],mo_matrix[keyi]",mo_obj_matrix[keyi,keyj],obj_matrix[keyj],mo_matrix[keyi])
-                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+#                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+                            prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj]
 
                     if enable_debug:
                         print("prob",prob)
@@ -561,13 +504,12 @@ def predict_motion_objective_fd(input_msg,pred,fd_msg):
     tf = open("./com_tr/mo_obj_model", "r")
     mo_obj_model = json.load(tf)
 
-    mo_matrix = np.array(mo_obj_model['Fi_mo'])
-    obj_matrix = np.array(mo_obj_model['Fi_obj'])
-    mo_obj_matrix = np.array(mo_obj_model['matrix'])
+    mo_matrix = np.array(mo_obj_model['Fi_mo'],dtype=object)
+    obj_matrix = np.array(mo_obj_model['Fi_obj'],dtype=object)
+    mo_obj_matrix = np.array(mo_obj_model['matrix'],dtype=object)
 
     fd_msg = fd_msg.strip()
     fd_msg = fd_msg.split(' ')
-    print("fd_msg",fd_msg)
     test_messages = input_msg
 
     word_dict = load_word_dic(word_dic_path)
@@ -577,9 +519,10 @@ def predict_motion_objective_fd(input_msg,pred,fd_msg):
     dimj = len(word_dict)
     word_dic_values = list(word_dict.values())
     mon_dic_values = list(motion_dic.values())
-    
+    revise_motiondic = False
     is_motion = False
     is_obj = False
+    revise_dic = False
     if pred == 1:
 
         if enable_debug:
@@ -600,6 +543,11 @@ def predict_motion_objective_fd(input_msg,pred,fd_msg):
                     if message[k] in word_dic_values:
                         keyj = word_dic_values.index(message[k])
                         prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj] / mo_matrix[keyi]
+                        prob[keyj] = mo_obj_matrix[keyi,keyj] * obj_matrix[keyj]
+                    else:
+                        revise_dic = True
+                        add_dic(word_dict,message[k])
+                        word_dic_values = list(word_dict.values())
 
                 idx = np.argmax(prob)
                 if enable_debug:
@@ -613,8 +561,24 @@ def predict_motion_objective_fd(input_msg,pred,fd_msg):
                 else:
                     obj_word.append('')
 #                return is_motion, fd_msg, is_obj, word_dict[idx]
+            else:
+                revise_motiondic = True
+                add_dic(motion_dic,fd_msg[m])
+                mon_dic_values = list(motion_dic.values())
+                if fd_msg[m] not in word_dic_values:
+                    revise_dic = True
+                    add_dic(word_dict,fd_msg[m])
+                    word_dic_values = list(word_dict.values())
     else:
         pass
+
+    if revise_dic:
+        write_json(word_dic_path, word_dict)
+        train_com_detect(train_path,test_path)
+
+    if revise_motiondic:
+        write_json(motion_dic_path, motion_dic)
+        fit_motion_matrix()
 
     return is_motion, motion_word, is_obj, obj_word,input_msg
 
@@ -646,49 +610,12 @@ def train_com_detect(train_path,test_path):
 
     naive_bayes_accuracy = np.mean(naive_bayes_predictions == test_labels)
     error_analysis(naive_bayes_predictions, test_labels, test_messages)
-    print('Naive Bayes had an accuracy of {} on the testing set'.format(naive_bayes_accuracy))
+    if enable_debug:
+        print('Naive Bayes had an accuracy of {} on the testing set'.format(naive_bayes_accuracy))
 
 
 
 def main():
-
-#    write_tsv('./com_tr/command_train3.tsv', ['com','please bring some paper'])
-#    print(test)
-#    train_messages, train_labels = load_command_dataset('./com_tr/command_train4.tsv')
-
-#    print("train_messages",len(train_messages), train_messages)
-#    print("train_labels",len(train_labels), train_labels)
-
-#    val_messages, val_labels = load_spam_dataset('./com_tr/command_val.tsv')
-#    test_messages, test_labels = load_command_dataset('./com_tr/command_test.tsv')
-#    print("train_labels", train_labels,train_labels.shape[0],np.where(train_labels==1)[0])
-
-#    dictionary = create_dictionary(train_messages)
-
-#    print('Size of dictionary: ', len(dictionary))
-
-#    write_json('./com_tr/command_dictionary', dictionary)
-
-#    train_matrix = transform_text(train_messages, dictionary)
-
-#    val_matrix = transform_text(val_messages, dictionary)
-#    test_matrix = transform_text(test_messages, dictionary)
-
-#    naive_bayes_model = fit_naive_bayes_model(train_matrix, train_labels)
-
-#    np.savetxt('./com_tr/command_model', naive_bayes_model, fmt='%s')
-#    naive_bayes_predictions = predict_from_naive_bayes_model(naive_bayes_model, test_matrix)
-
-#    np.savetxt('spam_naive_bayes_predictions', naive_bayes_predictions)
-#    np.savetxt('./com_tr/spam_naive_bayes_predictions', naive_bayes_predictions)
-#    if enable_debug:
-#        print("naive_bayes_predictions",naive_bayes_predictions)
-#        print("naive_bayes_predictions",np.where(naive_bayes_predictions==1))
-#        print("test_labels",np.where(test_labels==1))
-
-#    naive_bayes_accuracy = np.mean(naive_bayes_predictions == test_labels)
-#    error_analysis(naive_bayes_predictions, test_labels, test_messages)
-#    print('Naive Bayes had an accuracy of {} on the testing set'.format(naive_bayes_accuracy))
 
     train_com_detect(train_path,test_path)
 

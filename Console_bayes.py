@@ -7,9 +7,6 @@ from Predict import predict_command
 from com_tr import *
 import json
 
-#savepath_full = "command/Test/command.abstr"
-savepath = "command/Test/"
-savefolder = "command"
 word_dic_path = './com_tr/command_dictionary'
 save_train_path = './com_tr/motion_train2.tsv'
 enable_debug = False
@@ -19,15 +16,6 @@ status = 0 #0:human input 1: communicate 2: exit
 word_dic_path = './com_tr/command_dictionary'
 
 def command_detect(message):
-
-#    print("message",message)
-#    tf = open("./com_tr/command_dictionary", "r")
-#    word_dictionary = json.load(tf)
-#    print("word_dictionary",word_dictionary)
-
-#    word_dict = {}
-#    for key, value in word_dictionary.items():
-#        word_dict[int(key)] = value
 
     word_dict = load_word_dic(word_dic_path)
 #    print("word_dict",word_dict)
@@ -62,8 +50,8 @@ def command_detect(message):
 
 def msg_pre_procss(message):
 #    message = message + '\n'
-
-    msg = message.split('.')
+    msg = message.replace("?", ".")
+    msg = msg.split('.')
 #    print("msg",len(msg),msg)
     msg_list = []
     for i in range(len(msg)-1):
@@ -171,7 +159,7 @@ if __name__ == '__main__':
                         update_value.append(obj[0])
                         update_value.append(org_msg[0])
                         if enable_debug:
-                            print("obj,org_msg",obj,org_msg,update_value)
+                            print("obj,org_msg",obj,obj[0],org_msg,update_value)
                         write_tsv(save_train_path, update_value)
                         fit_motion_matrix()
                         update_data = False
@@ -203,8 +191,10 @@ if __name__ == '__main__':
                 is_motion, motion, is_obj, obj,org_msg = predict_motion_objective_fd(org_msg,need_fb,new_motion)
 
                 if not is_motion:
-                    print("Sorry, I dont have this feature. Please read the manual and input valid command.")
-                    status = 0
+#                    print("Sorry, I dont have this feature. Please read the manual and input valid command.")
+                    new_motion = input("Sorry, I dont have this feature. Please give the action word.\n")
+                    is_motion, motion, is_obj, obj,org_msg = predict_motion_objective_fd(org_msg,need_fb,new_motion)
+#                    status = 0
                 else:
                     if enable_debug:
                         print("motion,obj,org_msg",motion,obj,org_msg)
